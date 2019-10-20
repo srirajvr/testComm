@@ -20,89 +20,122 @@ class projectPage extends StatelessWidget {
                 width: double.infinity,
                 child: ListView(
                   children: <Widget>[
-                    Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Column(
-                          children: <Widget>[
-                            Center(
-                              child: Text(project.name.toString(),
-                                style: TextStyle(fontSize: 20),),
-                            ),
-                            SizedBox(height: 5,),
-                            Container(height: 1,color: Colors.black38,),
-                            SizedBox(height: 5,),
-                            Row(
-                              children: <Widget>[
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  flex:1,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(height:5),
-                                      Text("SCOD",),
-                                      Text("------------"),
-                                      //SizedBox(height: 8,),
-                                      Text(project.SCOD),
-                                      SizedBox(height:5)
-                                    ],
+                    Align(alignment: Alignment.topCenter,
+                                          child: Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Column(
+                            children: <Widget>[
+                              Center(
+                                child: Text(project.name.toString(),
+                                  style: TextStyle(fontSize: 20),),
+                              ),
+                              SizedBox(height: 5,),
+                              Container(height: 1,color: Colors.black38,),
+                              SizedBox(height: 5,),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    flex:1,
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height:5),
+                                        Text("SCOD",),
+                                        Text("------------"),
+                                        Text(project.SCOD),
+                                        SizedBox(height:5)
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(height:5),
-                                      Text("FR"),
-                                      Text("------------"),
-                                      Text(project.FR.toString()),
-                                      SizedBox(height:5)
-                                    ],
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height:5),
+                                        Text("FR"),
+                                        Text("------------"),
+                                        Text(project.FR.toString()),
+                                        SizedBox(height:5)
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height:5),
+                                        Text("RCE"),
+                                        Text("------------"),
+                                        Text(
+                                          project.RCE.length==0?"-": project.RCE[project.RCE.length-1].toString()
+                                        ),
+                                        SizedBox(height:5)
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height:5),
+                                        Text("Capital Cost"),
+                                        Text("------------"),
+                                        Text(project.SCOD),
+                                        SizedBox(height:5),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,)
+                                ],
+                              ),
+                            ],
 
-                                    children: <Widget>[
-                                      SizedBox(height:5),
-                                      Text("RCE"),
-                                      Text("------------"),
-                                      Text(
-                                        project.RCE.length==0?"-": project.RCE[project.RCE.length-1].toString()
-                                      ),
-                                      SizedBox(height:5)
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(height:5),
-                                      Text("Capital Cost"),
-                                      Text("------------"),
-                                      Text(project.SCOD),
-                                      SizedBox(height:5),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width: 10,)
-                              ],
-                            ),
-                          ],
-
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(height: 8,),
                     Card(
-                      child: Column(
-                        children: <Widget>[
-                          Text("order details"),
-                          Text("14-19 Order")
-                        ],
+                      
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15,8,8,8),
+                        child: Column(          
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(child: Text("Assets",style: TextStyle(fontWeight: FontWeight.bold,decoration: TextDecoration.underline),)),
+                            SizedBox(height: 5,),
+                            Container(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                  itemCount: project.assets.length,
+                                  itemBuilder: (context,index){
+                                    return Card(
+                                      color: kPrimaryLight,
+                                      margin: EdgeInsets.all(8),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text("${index+1}. ${project.assets[index]}"),
+                                      ),
+                                    );
+                                  },
+                                ),
+                            ),
+                            /*IntrinsicWidth(
+                              child: ListView.builder(
+                                itemCount: project.assets.length,
+                                itemBuilder: (context,index){
+                                  return Card(
+                                    child: Text(project.assets[index]),
+                                  );
+                                },
+                              ),
+                              )
+                          */
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -110,7 +143,6 @@ class projectPage extends StatelessWidget {
 
                 //data
               ),
-
               Container(
                 height: 100,
                 width: MediaQuery.of(context).size.width,
