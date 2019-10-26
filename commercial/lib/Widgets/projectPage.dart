@@ -1,11 +1,17 @@
 import 'package:commercial/Models/assets.dart';
 import 'package:commercial/data/appcolors.dart';
+import 'package:commercial/data/getData.dart';
+import 'package:commercial/data/variables.dart';
 import 'package:flutter/material.dart';
 
 class projectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Project project = ModalRoute.of(context).settings.arguments;
+    final double capital = getCapCost(project);
+    
+   // fetch();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -82,7 +88,7 @@ class projectPage extends StatelessWidget {
                                         SizedBox(height:5),
                                         Text("Capital Cost"),
                                         Text("------------"),
-                                        Text(project.SCOD),
+                                        Text(capital.toString()),
                                         SizedBox(height:5),
                                       ],
                                     ),
@@ -109,31 +115,27 @@ class projectPage extends StatelessWidget {
                             SizedBox(height: 5,),
                             Container(
                               child: ListView.builder(
-                                shrinkWrap: true,
+                                  shrinkWrap: true,
                                   itemCount: project.assets.length,
                                   itemBuilder: (context,index){
-                                    return Card(
-                                      color: kPrimaryLight,
-                                      margin: EdgeInsets.all(8),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text("${index+1}. ${project.assets[index]}"),
+                                    return GestureDetector(
+                                                                          
+                                      onTap: (){
+                                       Asset  asset = getAsset1(project.assets[index]);
+                                       Navigator.pushNamed(context, 'assetPage',arguments: asset);
+                                      },                                  
+                                      child: Card(
+                                        color: kPrimaryLight,
+                                        margin: EdgeInsets.all(8),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text("${index+1}. ${project.assets[index]}"),
+                                        ),
                                       ),
                                     );
                                   },
                                 ),
                             ),
-                            /*IntrinsicWidth(
-                              child: ListView.builder(
-                                itemCount: project.assets.length,
-                                itemBuilder: (context,index){
-                                  return Card(
-                                    child: Text(project.assets[index]),
-                                  );
-                                },
-                              ),
-                              )
-                          */
                           ],
                         ),
                       ),
@@ -179,4 +181,35 @@ class projectPage extends StatelessWidget {
       ),
     );
   }
+
+  double getCapCost(Project proj){
+    double capCost =0;
+
+    for(Asset asset in dummyAssets){
+      for(String name in proj.assets){
+        if(asset.name==name){
+          double temp = 0;
+          asset.addcap.forEach((a){temp+=a;});
+          capCost+=asset.dococost;
+          capCost+=temp;
+        }
+
+      }
+
+    }
+
+    return capCost;
+  }
+}
+
+Asset getAsset1(String assetname){
+Asset temp;
+dummyAssets.forEach((f){ 
+  if(f.name==assetname){
+    temp = f;
+  }
+});
+
+return temp;
+
 }

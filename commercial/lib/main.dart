@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:commercial/Widgets/MainPage.dart';
 import 'package:commercial/data/appcolors.dart';
 import 'package:commercial/Widgets/projectPage.dart';
+import 'package:commercial/Widgets/assetPage.dart';
 
 void main()=>runApp(MyApp());
 
@@ -13,8 +14,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes:{
-      '/':(context)=>MainPage(),
-      'projectPage':(context)=>projectPage()
+      '/':(context)=>MainPage1(),
+      'projectPage':(context)=>projectPage(),
+      'assetPage':(context)=>assetPage()
       },
       theme: _buildTheme(),
       title:"Commercial Data App",
